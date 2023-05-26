@@ -126,7 +126,7 @@ const tablesSchema = mongoose.Schema({
 
 const usersSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  UserName: String,
+  Name: String,
   Email: String,
   Address: String,
   Phone: String,

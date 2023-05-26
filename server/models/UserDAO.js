@@ -15,7 +15,7 @@ const UserDAO = {
     },
     async update(user) {
         const newvalues = { 
-            Username: user.Username,
+            Name: user.name,
             Email: user.Email,
             Address: user.Address,
             Phone: user.Phone,
