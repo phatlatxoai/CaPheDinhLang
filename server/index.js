@@ -15,4 +15,4 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 app.get('/hello', (req, res) => {
   res.json({ message: 'Hello from server!' });
 });
-app.use('/api/admin', require('./api/Admin.js'));
+app.use('/api/admin', require('./api/admin.js'));
