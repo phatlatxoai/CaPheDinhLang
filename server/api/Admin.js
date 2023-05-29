@@ -4,7 +4,12 @@ const router = express.Router();
 const JwtUtil = require('../utils/JwtUntil');
 // daos
 const AdminDAO = require('../models/AdminDAO');
+<<<<<<< Updated upstream
 
+=======
+const UserDAO = require('../models/UserDAO');
+const SupplierDAO = require('../models/SupplierDAO');
+>>>>>>> Stashed changes
 // login
 router.post('/login', async function (req, res) {
   const username = req.body.username;
@@ -85,4 +90,60 @@ router.delete('/users/:_id', JwtUtil.checkToken, async function (req, res) {
   res.json(result);
 });
 
+//SUPPLIERS
+// trả toàn bộ suppliers
+router.get('/suppliers', JwtUtil.checkToken, async function (req, res) {
+  const suppliers = await SupplierDAO.selectAll();
+  res.json(suppliers);
+});
+//thêm supplier
+router.post('/suppliers', JwtUtil.checkToken, async function (req, res) {
+  const NameSupplier = req.body.NameSupplier;
+  const email = req.body.email;
+  const phone = req.body.phone;
+  const address = req.body.address;
+  const note = req.body.note;
+  const debit = req.body.debit;
+  const avatar = req.body.avatar;
+  const supplier = {
+    name: NameSupplier,
+    email: email,
+    phone: phone,
+    address: address,
+    note: note,
+    debit: debit,
+    avatar: avatar
+  };
+  const result = await SupplierDAO.insert(supplier);
+  res.json(result);
+});
+//sửa supplier
+router.put('/suppliers/:_id', JwtUtil.checkToken, async function (req, res) {
+  const _id = req.params._id;
+  const NameSupplier = req.body.NameSupplier;
+  const email = req.body.email;
+  const phone = req.body.phone;
+  const address = req.body.address;
+  const note = req.body.note;
+  const debit = req.body.debit;
+  const avatar = req.body.avatar;
+  const supplier = {
+    _id: _id,
+    name: NameSupplier,
+    email: email,
+    phone: phone,
+    address: address,
+    note: note,
+    debit: debit,
+    avatar: avatar
+  }; 
+  const result = await SupplierDAO.update(supplier);
+  res.json(result);
+});
+//xóa supplier
+router.delete('/suppliers/:_id', JwtUtil.checkToken, async function (req, res) {
+  const _id = req.params._id;
+  const result = await SupplierDAO.delete(_id);
+  res.json(result);
+});
 module.exports = router;

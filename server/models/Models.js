@@ -16,7 +16,11 @@ const AreasSchema = mongoose.Schema({
   timestamps: true
 }, { versionKey: false });
 
+<<<<<<< Updated upstream
 const BillsSchema = mongoose.Schema({
+=======
+const tablesSchema = mongoose.Schema({
+>>>>>>> Stashed changes
   _id: mongoose.Schema.Types.ObjectId,
   BranchName: String,
   Sale: Number,
@@ -31,6 +35,7 @@ const BillsSchema = mongoose.Schema({
   timestamps: true
 }, { versionKey: false });
 
+<<<<<<< Updated upstream
 const BilldetailSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   Quantity: Number,
@@ -40,6 +45,8 @@ const BilldetailSchema = mongoose.Schema({
   timestamps: true
 }, { versionKey: false });
 
+=======
+>>>>>>> Stashed changes
 const CategoriesSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   CateName: String,
@@ -70,6 +77,31 @@ const MenusSchema = mongoose.Schema({
 }, {
   timestamps: true
 }, { versionKey: false });
+<<<<<<< Updated upstream
+=======
+
+const BilldetailSchema = mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
+  Quantity: Number,
+  Price: Number,
+  Menu: [MenusSchema]
+}, {
+  timestamps: true
+}, { versionKey: false });
+
+const SuppliersSchema = mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
+  Namesupplier: String,
+  Email: String,
+  Phone: String,
+  Address: String,
+  Note: String,
+  Debit: Number,
+  Avatar: String
+}, {
+  timestamps: true
+}, { versionKey: false });
+>>>>>>> Stashed changes
 
 const ProductsSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -101,6 +133,7 @@ const StoresSchema = mongoose.Schema({
   timestamps: true
 }, { versionKey: false });
 
+<<<<<<< Updated upstream
 const SuppliersSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   Namesupplier: String,
@@ -124,6 +157,8 @@ const tablesSchema = mongoose.Schema({
   timestamps: true
 }, { versionKey: false });
 
+=======
+>>>>>>> Stashed changes
 const usersSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   Name: String,
@@ -136,6 +171,24 @@ const usersSchema = mongoose.Schema({
 }, {
   timestamps: true
 }, { versionKey: false });
+<<<<<<< Updated upstream
+=======
+
+const BillsSchema = mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
+  BranchName: String,
+  Sale: Number,
+  Status: Boolean,
+  Totalprice: Number,
+  Note: String,
+  Table: tablesSchema,
+  Billdetail: BilldetailSchema,
+  Customer: CustomersSchema,
+  User: usersSchema
+}, {
+  timestamps: true
+}, { versionKey: false });
+>>>>>>> Stashed changes
 
 //model
 const Admin = mongoose.model('Admin', AdminSchema);
