@@ -4,7 +4,7 @@ const router = express.Router();
 const JwtUtil = require('../utils/JwtUntil');
 // daos
 const AdminDAO = require('../models/AdminDAO');
-
+const UserDAO = require('../models/UserDAO');
 // login
 router.post('/login', async function (req, res) {
   const username = req.body.username;
