@@ -4,12 +4,8 @@ const router = express.Router();
 const JwtUtil = require('../utils/JwtUntil');
 // daos
 const AdminDAO = require('../models/AdminDAO');
-<<<<<<< Updated upstream
-
-=======
 const UserDAO = require('../models/UserDAO');
 const SupplierDAO = require('../models/SupplierDAO');
->>>>>>> Stashed changes
 // login
 router.post('/login', async function (req, res) {
   const username = req.body.username;
