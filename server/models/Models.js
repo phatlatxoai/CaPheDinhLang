@@ -1,11 +1,7 @@
 //CLI: npm install mongoose --save
 const mongoose = require('mongoose');
 // schemas Admin
-const AdminsSchema = mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
-  Username: String,
-  Password: String,
-}, { versionKey: false })
+
 
 
 // schemas Area
@@ -18,15 +14,10 @@ const AreasSchema = mongoose.Schema({
 
 const tablesSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  BranchName: String,
-  Sale: Number,
-  Status: Boolean,
-  Totalprice: Number,
-  Note: String,
-  Table: tablesSchema,
-  Billdetail: BilldetailSchema,
-  Customer: CustomersSchema,
-  User: usersSchema
+  TableName: String,
+  Status: String,
+  Phone: String,
+  Area: AreasSchema
 }, {
   timestamps: true
 }, { versionKey: false });
@@ -58,6 +49,26 @@ const MenusSchema = mongoose.Schema({
   Images: String,
   Unit: String,
   Categories: CategoriesSchema,
+}, {
+  timestamps: true
+}, { versionKey: false });
+const BilldetailSchema = mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
+  Quantity: Number,
+  Price: Number,
+  Menu: [MenusSchema]
+}, {
+  timestamps: true
+}, { versionKey: false });
+const SuppliersSchema = mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
+  Namesupplier: String,
+  Email: String,
+  Phone: String,
+  Address: String,
+  Note: String,
+  Debit: Number,
+  Avatar: String
 }, {
   timestamps: true
 }, { versionKey: false });
@@ -126,6 +137,20 @@ const usersSchema = mongoose.Schema({
 }, {
   timestamps: true
 }, { versionKey: false });
+const BillsSchema = mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
+  BranchName: String,
+  Sale: Number,
+  Status: Boolean,
+  Totalprice: Number,
+  Note: String,
+  Table: tablesSchema,
+  Billdetail: BilldetailSchema,
+  Customer: CustomersSchema,
+  User: usersSchema
+}, {
+  timestamps: true
+}, { versionKey: false });
 
 const BillsSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -143,7 +168,6 @@ const BillsSchema = mongoose.Schema({
 }, { versionKey: false });
 
 //model
-const Admin = mongoose.model('Admin', AdminSchema);
 const Area = mongoose.model('Area', AreasSchema);
 const Bill = mongoose.model('Bill', BillsSchema);
 const Billdetail = mongoose.model('Billdetail', BilldetailSchema);
@@ -156,4 +180,4 @@ const Store = mongoose.model('Store', StoresSchema);
 const Supplier = mongoose.model('Supplier', SuppliersSchema);
 const Table = mongoose.model('Table', tablesSchema);
 const User = mongoose.model('User', usersSchema);
-module.exports = { Admin, Area, Bill, Billdetail, Category, Customer, Menu, Product, Storereceipt, Store, Supplier, Table, User };
+module.exports = {  Area, Bill, Billdetail, Category, Customer, Menu, Product, Storereceipt, Store, Supplier, Table, User };
