@@ -52,26 +52,6 @@ const MenusSchema = mongoose.Schema({
 }, {
   timestamps: true
 }, { versionKey: false });
-const BilldetailSchema = mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
-  Quantity: Number,
-  Price: Number,
-  Menu: [MenusSchema]
-}, {
-  timestamps: true
-}, { versionKey: false });
-const SuppliersSchema = mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
-  Namesupplier: String,
-  Email: String,
-  Phone: String,
-  Address: String,
-  Note: String,
-  Debit: Number,
-  Avatar: String
-}, {
-  timestamps: true
-}, { versionKey: false });
 
 const BilldetailSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -134,20 +114,6 @@ const usersSchema = mongoose.Schema({
   Role: String,
   username: String,
   password: String,
-}, {
-  timestamps: true
-}, { versionKey: false });
-const BillsSchema = mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
-  BranchName: String,
-  Sale: Number,
-  Status: Boolean,
-  Totalprice: Number,
-  Note: String,
-  Table: tablesSchema,
-  Billdetail: BilldetailSchema,
-  Customer: CustomersSchema,
-  User: usersSchema
 }, {
   timestamps: true
 }, { versionKey: false });
