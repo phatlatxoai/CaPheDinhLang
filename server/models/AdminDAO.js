@@ -4,7 +4,7 @@ const Models = require('./Models');
 const AdminDAO = {
   async selectByUsernameAndPassword(username, password) {
     const query = { username: username, password: password };
-    const admin = await Models.Admin.findOne(query);
+    const admin = await Models.User.findOne(query);
     return admin;
   }
 };
