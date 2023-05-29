@@ -10,7 +10,10 @@ const UserDAO = {
     async insert(user) {
         const mongoose = require('mongoose');
         user._id = new mongoose.Types.ObjectId();
+        console.log(user)
         const result = await Models.User.create(user);
+        console.log(result)
+
         return result;
     },
     async update(user) {

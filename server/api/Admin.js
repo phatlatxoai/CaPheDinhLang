@@ -76,14 +76,15 @@ router.post('/users', JwtUtil.checkToken, async function (req, res) {
   const username = req.body.username;
   const password = req.body.password;
   const user = {
-    name: name,
-    email: email,
-    address: address,
-    phone: phone,
-    role: role,
-    username: username,
-    password: password
+    Name: name,
+    Email: email,
+    Address: address,
+    Phone: phone,
+    Role: role,
+    Username: username,
+    Password: password
   };
+  console.log(user)
   const result = await UserDAO.insert(user);
   res.json(result);
 });
@@ -163,7 +164,7 @@ router.put('/suppliers/:_id', JwtUtil.checkToken, async function (req, res) {
     note: note,
     debit: debit,
     avatar: avatar
-  }; 
+  };
   const result = await SupplierDAO.update(supplier);
   res.json(result);
 });

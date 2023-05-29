@@ -105,15 +105,15 @@ const StoresSchema = mongoose.Schema({
   timestamps: true
 }, { versionKey: false });
 
-const usersSchema = mongoose.Schema({
+const UsersSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   Name: String,
   Email: String,
   Address: String,
   Phone: String,
   Role: String,
-  username: String,
-  password: String,
+  Username: String,
+  Password: String,
 }, {
   timestamps: true
 }, { versionKey: false });
@@ -128,7 +128,10 @@ const BillsSchema = mongoose.Schema({
   Table: tablesSchema,
   Billdetail: BilldetailSchema,
   Customer: CustomersSchema,
-  User: usersSchema
+  User: UsersSchema
+
+
+
 }, {
   timestamps: true
 }, { versionKey: false });
@@ -145,5 +148,5 @@ const Storereceipt = mongoose.model('Storereceipt', StorereceiptsSchema);
 const Store = mongoose.model('Store', StoresSchema);
 const Supplier = mongoose.model('Supplier', SuppliersSchema);
 const Table = mongoose.model('Table', tablesSchema);
-const User = mongoose.model('User', usersSchema);
+const User = mongoose.model('User', UsersSchema);
 module.exports = {  Area, Bill, Billdetail, Category, Customer, Menu, Product, Storereceipt, Store, Supplier, Table, User };
