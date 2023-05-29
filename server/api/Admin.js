@@ -6,6 +6,7 @@ const JwtUtil = require('../utils/JwtUntil');
 const AdminDAO = require('../models/AdminDAO');
 const UserDAO = require('../models/UserDAO');
 const SupplierDAO = require('../models/SupplierDAO');
+const CategoryDAO = require('../models/CategoryDAO');
 // login
 router.post('/login', async function (req, res) {
   const username = req.body.username;
@@ -23,12 +24,42 @@ router.post('/login', async function (req, res) {
   }
 });
 
-
 router.get('/token', JwtUtil.checkToken, function (req, res) {
   const token = req.headers['x-access-token'] || req.headers['authorization'];
   res.json({ success: true, message: 'Token is valid', token: token });
 });
-
+//CATEGORY
+// trả toàn bộ category
+router.get('/category', JwtUtil.checkToken, async function (req, res) {
+  const category = await CategoryDAO.selectAll();
+  res.json(category);
+});
+//thêm category
+router.post('/category', JwtUtil.checkToken, async function (req, res) {
+  const name = req.body.name;
+  const category = {
+    name: name
+  };
+  const result = await CategoryDAO.insert(category);
+  res.json(result);
+});
+//sửa category
+router.put('/category', JwtUtil.checkToken, async function (req, res) {
+  const _id = req.body._id;
+  const name = req.body.name;
+  const category = {
+    _id: _id,
+    name: name
+  };
+  const result = await CategoryDAO.update(category);
+  res.json(result);
+});
+//xóa category
+router.delete('/category/:_id', JwtUtil.checkToken, async function (req, res) {
+  const _id = req.params._id;
+  const result = await CategoryDAO.delete(_id);
+  res.json(result);
+});
 // USERS
 // trả toàn bộ users
 router.get('/users', JwtUtil.checkToken, async function (req, res) {
@@ -142,4 +173,5 @@ router.delete('/suppliers/:_id', JwtUtil.checkToken, async function (req, res) {
   const result = await SupplierDAO.delete(_id);
   res.json(result);
 });
+
 module.exports = router;
