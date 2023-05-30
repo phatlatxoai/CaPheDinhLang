@@ -7,6 +7,7 @@ const AdminDAO = require('../models/AdminDAO');
 const UserDAO = require('../models/UserDAO');
 const SupplierDAO = require('../models/SupplierDAO');
 const CategoryDAO = require('../models/CategoryDAO');
+const AreaDAO = require('../models/AreaDAO');
 // login
 router.post('/login', async function (req, res) {
   const username = req.body.username;
@@ -38,7 +39,7 @@ router.get('/category', JwtUtil.checkToken, async function (req, res) {
 router.post('/category', JwtUtil.checkToken, async function (req, res) {
   const name = req.body.name;
   const category = {
-    name: name
+    Name: name
   };
   const result = await CategoryDAO.insert(category);
   res.json(result);
@@ -49,7 +50,7 @@ router.put('/category', JwtUtil.checkToken, async function (req, res) {
   const name = req.body.name;
   const category = {
     _id: _id,
-    name: name
+    Name: name
   };
   const result = await CategoryDAO.update(category);
   res.json(result);
@@ -100,13 +101,13 @@ router.put('/users/:_id', JwtUtil.checkToken, async function (req, res) {
   const password = req.body.password;
   const user = {
     _id: _id,
-    name: name,
-    email: email,
-    address: address,
-    phone: phone,
-    role: role,
-    username: username,
-    password: password
+    Name: name,
+    Email: email,
+    Address: address,
+    Phone: phone,
+    Role: role,
+    Username: username,
+    Password: password
   };
   const result = await UserDAO.update(user);
   res.json(result);
@@ -134,13 +135,13 @@ router.post('/suppliers', JwtUtil.checkToken, async function (req, res) {
   const debit = req.body.debit;
   const avatar = req.body.avatar;
   const supplier = {
-    name: NameSupplier,
-    email: email,
-    phone: phone,
-    address: address,
-    note: note,
-    debit: debit,
-    avatar: avatar
+    Name: NameSupplier,
+    Email: email,
+    Phone: phone,
+    Address: address,
+    Note: note,
+    Debit: debit,
+    Avatar: avatar
   };
   const result = await SupplierDAO.insert(supplier);
   res.json(result);
@@ -157,13 +158,13 @@ router.put('/suppliers/:_id', JwtUtil.checkToken, async function (req, res) {
   const avatar = req.body.avatar;
   const supplier = {
     _id: _id,
-    name: NameSupplier,
-    email: email,
-    phone: phone,
-    address: address,
-    note: note,
-    debit: debit,
-    avatar: avatar
+    Name: NameSupplier,
+    Email: email,
+    Phone: phone,
+    Address: address,
+    Note: note,
+    Debit: debit,
+    Avatar: avatar
   };
   const result = await SupplierDAO.update(supplier);
   res.json(result);
@@ -173,6 +174,103 @@ router.delete('/suppliers/:_id', JwtUtil.checkToken, async function (req, res) {
   const _id = req.params._id;
   const result = await SupplierDAO.delete(_id);
   res.json(result);
+});
+
+
+// Area .
+// trả toàn bộ
+router.get('/areas', JwtUtil.checkToken, async function (req, res) {
+  try {
+    const area = await AreaDAO.selectAll();
+    if(area){
+      res.json({success:true,data:area});
+
+    }else{
+      res.json({success:true,message:"Không có dữ liệu"});
+
+    }
+  } catch (error) {
+    res.json(error);
+
+  }
+
+});
+//thêm supplier
+router.post('/areas', JwtUtil.checkToken, async function (req, res) {
+  try {
+    const BranchName = req.body.BranchName;
+    console.log(BranchName)
+    if(BranchName){
+      const Area = {
+        BranchName: BranchName,
+      };
+      const result = await AreaDAO.insert(Area);
+      res.json(
+        {success:true,
+        message:"Thêm Thành công",result
+        }
+        );
+
+    }else{
+      res.json(
+        {success:false,
+        message:"Vui lòng nhập đủ các trường"
+        }
+        );
+    }
+  } catch (error) {
+    res.json(error);
+
+  }
+
+});
+//sửa supplier
+router.put('/areas/:_id', JwtUtil.checkToken, async function (req, res) {
+  try {
+    const _id = req.params._id;
+  const BranchName = req.body.BranchName;
+  if(_id && BranchName){
+    const area = {
+      _id,
+      BranchName
+    };
+    const result = await AreaDAO.update(area);
+    res.json(
+      {success:true,
+      message:"Sửa thành công",result
+      }
+      );
+  }else{
+    res.json({success:false,message:"Vui lòng nhập đủ các trường"});
+      }
+  } catch (error) {
+    res.json({success:false,error});
+  }
+
+
+
+});
+//xóa supplier
+router.delete('/areas/:_id', JwtUtil.checkToken, async function (req, res) {
+  try {
+    const _id = req.params._id;
+  if(_id){
+    const area = {
+      _id
+
+    };
+    const result = await AreaDAO.update(area);
+    res.json(
+      {success:true,
+      message:"Xoá thành công",result
+      }
+      );
+  }else{
+    res.json({success:false,message:"_id không hợp lệ"});
+      }
+  } catch (error) {
+    res.json({success:false,error});
+  }
 });
 
 module.exports = router;

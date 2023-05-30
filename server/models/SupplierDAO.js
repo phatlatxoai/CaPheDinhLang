@@ -14,16 +14,8 @@ const SupplierDAO = {
         return result;
     },
     async update(supplier) {
-        const newvalues = {
-            Namesupplier: supplier.Namesupplier,
-            Email: supplier.Email,
-            Phone: supplier.Phone,
-            Address: supplier.Address,
-            Note: supplier.Note,
-            Debit: supplier.Debit,
-            Avatar: supplier.Avatar
-        }
-        const result = await Models.Supplier.findByIdAndUpdate(supplier._id, newvalues, { new: true });
+
+        const result = await Models.Supplier.findByIdAndUpdate(supplier._id, supplier, { new: true });
         return result;
     },
     async delete(_id) {
