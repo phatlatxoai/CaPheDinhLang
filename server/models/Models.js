@@ -16,7 +16,6 @@ const tablesSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   TableName: String,
   Status: String,
-  Phone: String,
   Area: AreasSchema
 }, {
   timestamps: true
