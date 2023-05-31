@@ -135,7 +135,7 @@ router.post('/suppliers', JwtUtil.checkToken, async function (req, res) {
   const debit = req.body.debit;
   const avatar = req.body.avatar;
   const supplier = {
-    Name: NameSupplier,
+    Namesupplier: NameSupplier,
     Email: email,
     Phone: phone,
     Address: address,
@@ -158,7 +158,7 @@ router.put('/suppliers/:_id', JwtUtil.checkToken, async function (req, res) {
   const avatar = req.body.avatar;
   const supplier = {
     _id: _id,
-    Name: NameSupplier,
+    Namesupplier: NameSupplier,
     Email: email,
     Phone: phone,
     Address: address,
