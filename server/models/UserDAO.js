@@ -23,8 +23,8 @@ const UserDAO = {
             Address: user.Address,
             Phone: user.Phone,
             Role: user.Role,
-            username: user.username,
-            password: user.password
+            Username: user.username,
+            Password: user.password
         }
         const result = await Models.User.findByIdAndUpdate(user._id, newvalues, { new: true });
         return result;
