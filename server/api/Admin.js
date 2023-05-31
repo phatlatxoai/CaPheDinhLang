@@ -100,13 +100,13 @@ router.put('/users/:_id', JwtUtil.checkToken, async function (req, res) {
   const password = req.body.password;
   const user = {
     _id: _id,
-    name: name,
-    email: email,
-    address: address,
-    phone: phone,
-    role: role,
-    username: username,
-    password: password
+    Name: name,
+    Email: email,
+    Address: address,
+    Phone: phone,
+    Role: role,
+    Username: username,
+    Password: password
   };
   const result = await UserDAO.update(user);
   res.json(result);
@@ -134,13 +134,13 @@ router.post('/suppliers', JwtUtil.checkToken, async function (req, res) {
   const debit = req.body.debit;
   const avatar = req.body.avatar;
   const supplier = {
-    name: NameSupplier,
-    email: email,
-    phone: phone,
-    address: address,
-    note: note,
-    debit: debit,
-    avatar: avatar
+    Namesupplier: NameSupplier,
+    Email: email,
+    Phone: phone,
+    Address: address,
+    Note: note,
+    Debit: debit,
+    Avatar: avatar
   };
   const result = await SupplierDAO.insert(supplier);
   res.json(result);
@@ -157,13 +157,13 @@ router.put('/suppliers/:_id', JwtUtil.checkToken, async function (req, res) {
   const avatar = req.body.avatar;
   const supplier = {
     _id: _id,
-    name: NameSupplier,
-    email: email,
-    phone: phone,
-    address: address,
-    note: note,
-    debit: debit,
-    avatar: avatar
+    Namesupplier: NameSupplier,
+    Email: email,
+    Phone: phone,
+    Address: address,
+    Note: note,
+    Debit: debit,
+    Avatar: avatar
   };
   const result = await SupplierDAO.update(supplier);
   res.json(result);

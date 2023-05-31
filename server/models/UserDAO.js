@@ -17,16 +17,7 @@ const UserDAO = {
         return result;
     },
     async update(user) {
-        const newvalues = {
-            Name: user.name,
-            Email: user.Email,
-            Address: user.Address,
-            Phone: user.Phone,
-            Role: user.Role,
-            Username: user.username,
-            Password: user.password
-        }
-        const result = await Models.User.findByIdAndUpdate(user._id, newvalues, { new: true });
+        const result = await Models.User.findByIdAndUpdate(user._id, user, { new: true });
         return result;
     },
     async delete(_id) {
