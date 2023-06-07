@@ -47,6 +47,7 @@ const MenusSchema = mongoose.Schema({
   Price: Number,
   Images: String,
   Unit: String,
+  Size: String,
   Categories: CategoriesSchema,
 }, {
   timestamps: true
@@ -54,9 +55,10 @@ const MenusSchema = mongoose.Schema({
 
 const BilldetailSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
+  Name: String,
+  Size:String,
   Quantity: Number,
   Price: Number,
-  Menu: [MenusSchema]
 }, {
   timestamps: true
 }, { versionKey: false });
@@ -120,13 +122,12 @@ const UsersSchema = mongoose.Schema({
 const BillsSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   BranchName: String,
-  Sale: Number,
-  Status: Boolean,
-  Totalprice: Number,
+  Sale: String,
+  Status: String,
+  Totalprice: String,
   Note: String,
   Table: tablesSchema,
-  Billdetail: BilldetailSchema,
-  Customer: CustomersSchema,
+  Billdetail: [BilldetailSchema],
   User: UsersSchema
 
 

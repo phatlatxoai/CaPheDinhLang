@@ -3,27 +3,26 @@ const Models = require('./Models');
 
 const TableDAO = {
     async selectAll() {
-        const query = {};
-        const tables = await Models.Table.find(query).exec();
-        return tables;
+      const query = {};
+      const Table = await Models.Table.find(query).exec();
+      return Table;
     },
-    async insert(table) {
-        const mongoose = require('mongoose');
-        table._id = new mongoose.Types.ObjectId();
-        console.log(table)
-        const result = await Models.Table.create(table);
-        console.log(result)
-
-        return result;
+    async insert(Table) {
+      const mongoose = require('mongoose');
+      Table._id = new mongoose.Types.ObjectId();
+      const result = await Models.Table.create(Table);
+      return result;
     },
-    async update(table) {
-        
-        const result = await Models.Table.findByIdAndUpdate(table._id, table, { new: true });
-        return result;
-    },
-    async delete(_id) {
-        const result = await Models.Table.findByIdAndRemove(_id);
-        return result;
+     async update(Table) {
+        console.log(Table)
+      const result = await Models.Table.findByIdAndUpdate(Table._id, Table, { new: true });
+      return result;
+     },
+     async delete(_id) {
+      const result = await Models.Table.findByIdAndRemove(_id);
+      return result;
     }
-};
-module.exports = TableDAO;
+
+  };
+  module.exports = TableDAO;
+
