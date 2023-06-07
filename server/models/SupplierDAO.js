@@ -14,7 +14,6 @@ const SupplierDAO = {
         return result;
     },
     async update(supplier) {
-
         const result = await Models.Supplier.findByIdAndUpdate(supplier._id, supplier, { new: true });
         return result;
     },
