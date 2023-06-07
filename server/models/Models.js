@@ -47,12 +47,21 @@ const MenusSchema = mongoose.Schema({
   Price: Number,
   Images: String,
   Unit: String,
+  Size: String,
   Categories: CategoriesSchema,
 }, {
   timestamps: true
 }, { versionKey: false });
 
-
+const BilldetailSchema = mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
+  Name: String,
+  Size:String,
+  Quantity: Number,
+  Price: Number,
+}, {
+  timestamps: true
+}, { versionKey: false });
 
 const SuppliersSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -113,13 +122,12 @@ const UsersSchema = mongoose.Schema({
 const BillsSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   BranchName: String,
-  Sale: Number,
-  Status: Boolean,
-  Totalprice: Number,
+  Sale: String,
+  Status: String,
+  Totalprice: String,
   Note: String,
   Table: tablesSchema,
-  Billdetail: ProductsSchema,
-  Customer: CustomersSchema,
+  Billdetail: [BilldetailSchema],
   User: UsersSchema
 
 
@@ -131,6 +139,7 @@ const BillsSchema = mongoose.Schema({
 //model
 const Area = mongoose.model('Area', AreasSchema);
 const Bill = mongoose.model('Bill', BillsSchema);
+const Billdetail = mongoose.model('Billdetail', BilldetailSchema);
 const Category = mongoose.model('Category', CategoriesSchema);
 const Customer = mongoose.model('Customer', CustomersSchema);
 const Menu = mongoose.model('Menu', MenusSchema);
@@ -140,4 +149,4 @@ const Store = mongoose.model('Store', StoresSchema);
 const Supplier = mongoose.model('Supplier', SuppliersSchema);
 const Table = mongoose.model('Table', tablesSchema);
 const User = mongoose.model('User', UsersSchema);
-module.exports = {  Area, Bill, Category, Customer, Menu, Product, Storereceipt, Store, Supplier, Table, User };
+module.exports = {  Area, Bill, Billdetail, Category, Customer, Menu, Product, Storereceipt, Store, Supplier, Table, User };

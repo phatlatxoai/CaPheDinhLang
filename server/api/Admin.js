@@ -8,6 +8,11 @@ const UserDAO = require('../models/UserDAO');
 const SupplierDAO = require('../models/SupplierDAO');
 const CategoryDAO = require('../models/CategoryDAO');
 const AreaDAO = require('../models/AreaDAO');
+const { Table } = require('../models/Models');
+const TableDAO = require('../models/TableDAO');
+
+const BillDAO = require('../models/BillDAO');
+
 // login
 router.post('/login', async function (req, res) {
   const username = req.body.username;
@@ -37,9 +42,9 @@ router.get('/category', JwtUtil.checkToken, async function (req, res) {
 });
 //thêm category
 router.post('/category', JwtUtil.checkToken, async function (req, res) {
-  const name = req.body.name;
+  const CateName = req.body.CateName;
   const category = {
-    Name: name
+    CateName
   };
   const result = await CategoryDAO.insert(category);
   res.json(result);
@@ -47,10 +52,10 @@ router.post('/category', JwtUtil.checkToken, async function (req, res) {
 //sửa category
 router.put('/category', JwtUtil.checkToken, async function (req, res) {
   const _id = req.body._id;
-  const name = req.body.name;
+  const CateName = req.body.CateName;
   const category = {
     _id: _id,
-    Name: name
+    CateName
   };
   const result = await CategoryDAO.update(category);
   res.json(result);
@@ -247,8 +252,6 @@ router.put('/areas/:_id', JwtUtil.checkToken, async function (req, res) {
     res.json({success:false,error});
   }
 
-
-
 });
 //xóa supplier
 router.delete('/areas/:_id', JwtUtil.checkToken, async function (req, res) {
@@ -272,5 +275,189 @@ router.delete('/areas/:_id', JwtUtil.checkToken, async function (req, res) {
     res.json({success:false,error});
   }
 });
+
+// Area .
+// trả toàn bộ
+router.get('/tables', JwtUtil.checkToken, async function (req, res) {
+  try {
+    const table = await TableDAO.selectAll();
+    if(table){
+      res.json({success:true,data:table});
+
+    }else{
+      res.json({success:true,message:"Không có dữ liệu"});
+
+    }
+  } catch (error) {
+    res.json(error);
+
+  }
+
+});
+
+
+//thêm table
+router.post('/tables', JwtUtil.checkToken, async function (req, res) {
+  try {
+    const TableName = req.body.TableName;
+    const Status = req.body.Status;
+    const Area = req.body.Area;
+    console.log(TableName,Status,Area)
+    if(TableName&&Area){
+      const Table = {
+        TableName,
+        Status,
+        Area
+      };
+      console.log(TableName,Status,Area)
+
+      const result = await TableDAO.insert(Table);
+      res.json(
+        {success:true,
+        message:"Thêm Thành công",result
+        }
+        );
+
+    }else{
+      res.json(
+        {success:false,
+        message:"Vui lòng nhập đủ các trường"
+        }
+        );
+    }
+  } catch (error) {
+    res.json(error);
+
+  }
+
+});
+
+//sửa supplier
+router.put('/tables/:_id', JwtUtil.checkToken, async function (req, res) {
+  try {
+    const _id = req.params._id;
+    const TableName = req.body.TableName;
+    const Status = req.body.Status;
+    const Area = req.body.Area;
+  if(_id && TableName&&Status&&Area){
+    const table = {
+      _id,
+      TableName,
+      Status,
+      Area
+    };
+    const result = await TableDAO.update(table);
+    res.json(
+      {success:true,
+      message:"Sửa thành công",result
+      }
+      );
+  }else{
+    res.json({success:false,message:"Vui lòng nhập đủ các trường"});
+      }
+  } catch (error) {
+    res.json({success:false,error});
+  }
+
+});
+
+
+//xóa table
+router.delete('/tables/:_id', JwtUtil.checkToken, async function (req, res) {
+  try {
+    const _id = req.params._id;
+  if(_id){
+    const area = {
+      _id
+
+    };
+    const result = await TableDAO.update(area);
+    res.json(
+      {success:true,
+      message:"Xoá thành công",result
+      }
+      );
+  }else{
+    res.json({success:false,message:"_id không hợp lệ"});
+      }
+  } catch (error) {
+    res.json({success:false,error});
+  }
+});
+
+
+router.get('/bills', JwtUtil.checkToken, async function (req, res) {
+  try {
+    const bills = await BillDAO.selectAll();
+    if(bills){
+      res.json({success:true,data:bills});
+
+    }else{
+      res.json({success:true,message:"Không có dữ liệu"});
+
+    }
+  } catch (error) {
+    res.json(error);
+
+  }
+
+});
+
+
+//thêm Bill
+router.post('/bills', JwtUtil.checkToken, async function (req, res) {
+  try {
+    const BranchName = req.body.BranchName;
+    const Sale = req.body.Sale;
+    const Totalprice = req.body.Totalprice;
+    const Status = req.body.Status;
+    const Note = req.body.Note;
+    const Table = req.body.Table;
+    const Billdetail = req.body.Billdetail;
+    const User = req.body.User;
+    console.log({
+      BranchName,
+      Sale,
+      Status,
+      Totalprice,
+      Note,
+      Table,
+      Billdetail,
+      User
+   })
+
+
+    if(BranchName){
+      const Bill = {
+        BranchName,
+        Sale,
+        Totalprice,
+        Note,
+        Table,
+        Billdetail,
+        User
+      };
+      console.log(Bill,"2")
+
+      const result = await BillDAO.insert(Bill);
+      res.json(
+        {success:true,
+        message:"Thêm Thành công",result
+        }
+        );
+
+    }else{
+      res.json(
+        {success:false,
+        message:"Vui lòng nhập đủ các trường"
+        }
+        );
+    }
+  } catch (error) {
+    res.json(error);
+
+  }
+
+ });
 
 module.exports = router;
